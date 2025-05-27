@@ -102,8 +102,8 @@ $conn->close();
             <a href="login_admin.php" class="nav-link">Dashboard</a>
             <a href="login_admin.php?page=data_pemohon" class="nav-link ">Data Pemohon SKCK</a>
             <a href="login_admin.php?page=hitung_fuzzy" class="nav-link">Perhitungan Fuzzy</a>
-            <a href="login_admin.php?page=laporan" class="nav-link active">Laporan Pemohon SKCK</a>
-            <a href="login_admin.php?page=cetak" class="nav-link">Cetak</a>
+            <a href="login_admin.php?page=laporan" class="nav-link">Laporan Pemohon SKCK</a>
+            <a href="login_admin.php?page=cetak" class="nav-link active">Cetak</a>
             <a href="logout.php" class="nav-link text-danger">Logout</a>
         </div>
     </nav>
@@ -111,9 +111,9 @@ $conn->close();
         <header class="mb-4">
             <h1 class="h3 fw-bold text-primary">Hasil Pengajuan</h1>
         </header>
-        <a target="_blank" class="btn btn-secondary btn-sm mb-2" href="admin/cetak_fuzzy.php?<?php echo time()?>" aria-label="Cetak PDF Fuzzy">
+        <!-- <a target="_blank" class="btn btn-secondary btn-sm mb-2" href="admin/cetak_fuzzy.php?<?php echo time()?>" aria-label="Cetak PDF Fuzzy">
             🖨 Cetak PDF
-        </a>
+        </a> -->
         <section class="bg-white rounded shadow-sm p-4">
             <div class="table-responsive">
                 <table class="table table-striped table-hover align-middle mb-0">
@@ -160,8 +160,8 @@ $conn->close();
                                 <span class="badge bg-<?= $badge?>"><?= $keputusan?></span>
                             </td>
                             <td class="table-actions text-center">
-                                <a href="login_admin.php?page=detail_pemohon&detail=true&pid=<?= $row['pengajuan_id']?>" class="btn btn-info btn-sm" >
-                                    🔍 Detail
+                                <a href="login_admin.php?page=detail_cetak&pid=<?= $row['pengajuan_id']?>" class="btn btn-info btn-sm" >
+                                    Cetak
                                 </a>
                             </td>
                         </tr>
@@ -234,15 +234,6 @@ Rule evaluasi dan defuzzifikasi dilakukan dengan metode Tsukamoto... </code></pr
     </main>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function printPDF(nama) {
-            alert(
-                "Simulasi cetak PDF untuk " +
-                nama +
-                ". Fitur cetak dapat diintegrasikan dengan library seperti jsPDF."
-            );
-        }
-    </script>
 </body>
 
 </html>

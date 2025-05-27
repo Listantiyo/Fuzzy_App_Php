@@ -31,6 +31,7 @@ $result = mysqli_query($conn, $sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
+            font-family: "Times New Roman", Times, serif;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -96,6 +97,7 @@ $result = mysqli_query($conn, $sql);
             <a href="login_admin.php?page=data_pemohon" class="nav-link ">Data Pemohon SKCK</a>
             <a href="login_admin.php?page=hitung_fuzzy" class="nav-link active">Perhitungan Fuzzy</a>
             <a href="login_admin.php?page=laporan" class="nav-link">Laporan Pemohon SKCK</a>
+            <a href="login_admin.php?page=cetak" class="nav-link">Cetak</a>
             <a href="logout.php" class="nav-link text-danger">Logout</a>
         </div>
     </nav>
@@ -210,7 +212,7 @@ $result = mysqli_query($conn, $sql);
             const hasil = denominator === 0 ? 0 : numerator / denominator;
             let statusKeputusan = "Ditolak";
             if (hasil >= 80) statusKeputusan = "Diterima";
-            else if (hasil >= 50) statusKeputusan = "Butuh Evaluasi";
+            else if (hasil >= 50) statusKeputusan = "Butuh Evaluasi / Dalam Proses";
 
             return { hasil, statusKeputusan, derajatKriminal, derajatStatus };
         }

@@ -43,14 +43,23 @@ CREATE TABLE user (
     dibuat_pada TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO user (username, password, nama_lengkap, email, no_hp)
-VALUES (
-    'user', 
-    'user123', 
-    'Admin Desa', 
-    'user@mail.co', 
-    '081234567890'  
-);
+ALTER TABLE user
+ADD COLUMN agama VARCHAR(20) AFTER nama_lengkap,
+ADD COLUMN kebangsaan VARCHAR(30) AFTER agama,
+ADD COLUMN no_ktp VARCHAR(30) AFTER kebangsaan,
+ADD COLUMN tempat_lahir VARCHAR(50) AFTER no_ktp,
+ADD COLUMN tanggal_lahir DATE AFTER tempat_lahir,
+ADD COLUMN jenis_kelamin ENUM('L', 'P') AFTER tanggal_lahir;
+
+
+-- INSERT INTO user (username, password, nama_lengkap, email, no_hp)
+-- VALUES (
+--     'user', 
+--     'user123', 
+--     'Admin Desa', 
+--     'user@mail.co', 
+--     '081234567890'  
+-- );
 
 
 CREATE TABLE pengajuan (
@@ -144,6 +153,21 @@ CREATE TABLE verifikasi_admin (
     tanggal_verifikasi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (pengajuan_id) REFERENCES pengajuan(id)
 );
+
+ALTER TABLE verifikasi_admin
+ADD COLUMN berada_indonesia_dari DATE AFTER status_hukum,
+ADD COLUMN berada_indonesia_sampai DATE AFTER berada_indonesia_dari,
+ADD COLUMN berlaku_dari DATE AFTER untuk_keperluan,
+ADD COLUMN berlaku_sampai DATE AFTER berlaku_dari,
+ADD COLUMN dicetak_di VARCHAR(100) AFTER berlaku_sampai,
+ADD COLUMN tanggal_cetak DATE AFTER dicetak_di;
+
+ALTER TABLE verifikasi_admin
+MODIFY COLUMN berada_indonesia_dari VARCHAR(20),
+MODIFY COLUMN berada_indonesia_sampai VARCHAR(20),
+MODIFY COLUMN berlaku_dari VARCHAR(20),
+MODIFY COLUMN berlaku_sampai VARCHAR(20),
+MODIFY COLUMN tanggal_cetak VARCHAR(20);
 
 CREATE TABLE fuzzy_hasil (
   id INT AUTO_INCREMENT PRIMARY KEY,

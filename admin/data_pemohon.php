@@ -31,6 +31,7 @@ $result = mysqli_query($conn, $sql);
         body {
             min-height: 100vh;
             overflow-x: hidden;
+            font-family: "Times New Roman", Times, serif;
         }
 
         #sidebar {
@@ -118,6 +119,7 @@ $result = mysqli_query($conn, $sql);
             <a href="login_admin.php?page=data_pemohon" class="nav-link active">Data Pemohon SKCK</a>
             <a href="login_admin.php?page=hitung_fuzzy" class="nav-link">Perhitungan Fuzzy</a>
             <a href="login_admin.php?page=laporan" class="nav-link">Laporan Pemohon SKCK</a>
+            <a href="login_admin.php?page=cetak" class="nav-link">Cetak</a>
             <a href="logout.php" class="nav-link text-danger">Logout</a>
         </div>
     </nav>
