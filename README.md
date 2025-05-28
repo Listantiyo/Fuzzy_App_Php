@@ -13,16 +13,16 @@ Ikuti langkah berikut untuk menjalankan aplikasi ini di lokal:
 ```bash
 git clone https://github.com/Listantiyo/Fuzzy_App_Php.git
 cd fuzzy_app
-
+```
 ```bash
 composer install
-
+```
 ```php
 $host = "localhost";
 $user = "root";
 $pass = "";
 $db   = "fuzzy_app";
-
+```
 
 Kamu bisa sesuaikan bagian seperti:
 - URL repo GitHub kamu
