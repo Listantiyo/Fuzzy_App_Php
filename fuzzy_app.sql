@@ -52,14 +52,20 @@ ADD COLUMN tanggal_lahir DATE AFTER tempat_lahir,
 ADD COLUMN jenis_kelamin ENUM('L', 'P') AFTER tanggal_lahir;
 
 
--- INSERT INTO user (username, password, nama_lengkap, email, no_hp)
--- VALUES (
---     'user', 
---     'user123', 
---     'Admin Desa', 
---     'user@mail.co', 
---     '081234567890'  
--- );
+INSERT INTO user (username, password, nama_lengkap, email, no_hp, agama, kebangsaan, no_ktp, tempat_lahir, tanggal_lahir, jenis_kelamin)
+VALUES (
+    'user', 
+    'user123', 
+    'Admin Desa', 
+    'user@mail.co', 
+    '081234567890',
+    'islam',
+    'WNI',
+    '1464313216846',
+    'Kokii',
+    '2025-05-05',
+    'L'
+);
 
 
 CREATE TABLE pengajuan (
@@ -157,7 +163,7 @@ CREATE TABLE verifikasi_admin (
 ALTER TABLE verifikasi_admin
 ADD COLUMN berada_indonesia_dari DATE AFTER status_hukum,
 ADD COLUMN berada_indonesia_sampai DATE AFTER berada_indonesia_dari,
-ADD COLUMN berlaku_dari DATE AFTER untuk_keperluan,
+ADD COLUMN berlaku_dari DATE AFTER berada_indonesia_sampai,
 ADD COLUMN berlaku_sampai DATE AFTER berlaku_dari,
 ADD COLUMN dicetak_di VARCHAR(100) AFTER berlaku_sampai,
 ADD COLUMN tanggal_cetak DATE AFTER dicetak_di;
