@@ -24,10 +24,10 @@ $pass = "";
 $db   = "fuzzy_app";
 ```
 
-Kamu bisa sesuaikan bagian seperti:
+<!-- Kamu bisa sesuaikan bagian seperti:
 - URL repo GitHub kamu
 - Nama file SQL
 - Struktur direktori
 - Tambahkan info login jika ada (admin/user demo)
 
-Kalau kamu ingin versi berbahasa Indonesia atau versi markdown interaktif (dengan badge, tabel, dll), tinggal bilang ya.
+Kalau kamu ingin versi berbahasa Indonesia atau versi markdown interaktif (dengan badge, tabel, dll), tinggal bilang ya. -->
