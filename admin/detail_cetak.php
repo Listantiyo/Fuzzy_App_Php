@@ -195,7 +195,12 @@ $verifikasi = mysqli_fetch_assoc($q_verifikasi);
         </div>
     </nav>
 
-    <main id="content" role="main" tabindex="-1"><div class="center">
+    
+    <main id="content" role="main" tabindex="-1">
+      <a target="_blank" class="btn btn-secondary btn-sm mb-2 mt-2" href="admin/pdf_detail_cetak.php?pid=<?=$pid?>&<?php echo date('ymds')?>" aria-label="Cetak PDF Fuzzy">
+              🖨 Cetak PDF
+          </a>
+      <div class="center">
     <div style="display: flex; justify-content: space-between;">
       <div style="flex: 1;">
         <div class="header">POLRI DAERAH JAWA TIMUR</div>
