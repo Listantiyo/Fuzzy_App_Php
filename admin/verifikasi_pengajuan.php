@@ -200,27 +200,6 @@ $berlaku_sampai = $_POST['berlaku_sampai'];
 $dicetak_di = $_POST['dicetak_di'];
 $tanggal_cetak = $_POST['tanggal_cetak'];
 
-// Update date range and purpose information
-$update_dates = mysqli_prepare($conn, "UPDATE verifikasi_admin SET 
-    berada_indonesia_dari = ?,
-    berada_indonesia_sampai = ?,
-    berlaku_dari = ?,
-    berlaku_sampai = ?,
-    dicetak_di = ?,
-    tanggal_cetak = ?
-    WHERE pengajuan_id = ?");
-mysqli_stmt_bind_param($update_dates, "ssssssi",
-    $berada_indonesia_dari,
-    $berada_indonesia_sampai,
-    $berlaku_dari,
-    $berlaku_sampai,
-    $dicetak_di,
-    $tanggal_cetak,
-    $pengajuan_id
-);
-mysqli_stmt_execute($update_dates);
-
-
 // Ambil data dari form
 $verifikasi_id = $_POST['verifikasi_id'] ?? null;
 $poin_riwayat_kriminal = $_POST['poin_riwayat_kriminal'];
@@ -229,23 +208,93 @@ $poin_status_hukum = $_POST['poin_status_hukum'];
 if ($verifikasi_id) {
     // Update verifikasi_admin
     $sql = "UPDATE verifikasi_admin 
-            SET riwayat_kriminal = ?, status_hukum = ?, tanggal_verifikasi = NOW()
+            SET 
+            riwayat_kriminal = ?, 
+            status_hukum = ?, 
+            tanggal_verifikasi = NOW()
             WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "iii", $poin_riwayat_kriminal, $poin_status_hukum, $verifikasi_id);
     mysqli_stmt_execute($stmt);
+
+    // Update date range and purpose information
+    $update_dates = mysqli_prepare($conn, "UPDATE verifikasi_admin SET 
+        berada_indonesia_dari = ?,
+        berada_indonesia_sampai = ?,
+        berlaku_dari = ?,
+        berlaku_sampai = ?,
+        dicetak_di = ?,
+        tanggal_cetak = ?
+        WHERE pengajuan_id = ?");
+    mysqli_stmt_bind_param($update_dates, "ssssssi",
+    $berada_indonesia_dari,
+    $berada_indonesia_sampai,
+        $berlaku_dari,
+        $berlaku_sampai,
+        $dicetak_di,
+        $tanggal_cetak,
+        $pengajuan_id
+        );
+    mysqli_stmt_execute($update_dates);
 } else {
     // Insert verifikasi_admin
-    $sql = "INSERT INTO verifikasi_admin (pengajuan_id, riwayat_kriminal, status_hukum, tanggal_verifikasi)
-            VALUES (?, ?, ?, NOW())";
+    $sql = "INSERT INTO verifikasi_admin (
+                pengajuan_id, 
+                riwayat_kriminal, 
+                status_hukum, 
+                tanggal_verifikasi,
+
+                berada_indonesia_dari,
+                berada_indonesia_sampai,
+                berlaku_dari,
+                berlaku_sampai,
+                dicetak_di,
+                tanggal_cetak
+            )
+            VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "iii", $pengajuan_id, $poin_riwayat_kriminal, $poin_status_hukum);
+    mysqli_stmt_bind_param($stmt, "iiissssss", 
+    $pengajuan_id, 
+    $poin_riwayat_kriminal, 
+        $poin_status_hukum,
+        $berada_indonesia_dari,
+        $berada_indonesia_sampai,
+        $berlaku_dari,
+        $berlaku_sampai,
+        $dicetak_di,
+        $tanggal_cetak
+    );
     mysqli_stmt_execute($stmt);
+
+    $insert_dates = mysqli_prepare($conn, "INSERT INTO verifikasi_admin (
+        berada_indonesia_dari,
+        berada_indonesia_sampai,
+        berlaku_dari,
+        berlaku_sampai,
+        dicetak_di,
+        tanggal_cetak,
+        pengajuan_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    
+    mysqli_stmt_bind_param($insert_dates, "ssssssi",
+        $berada_indonesia_dari,
+        $berada_indonesia_sampai,
+        $berlaku_dari,
+        $berlaku_sampai,
+        $dicetak_di,
+        $tanggal_cetak,
+        $pengajuan_id
+    );
+    
+    // mysqli_stmt_execute($insert_dates);
+    
 
     // Update status_verifikasi di tabel pengajuan
     $update = mysqli_prepare($conn, "UPDATE pengajuan SET status_verifikasi = 'sudah' WHERE id = ?");
     mysqli_stmt_bind_param($update, "i", $pengajuan_id);
     mysqli_stmt_execute($update);
+
+
 }
 
 
