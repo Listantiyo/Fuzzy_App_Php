@@ -4,6 +4,7 @@ require '../fungsi_fuzzy.php'; // Pastikan $conn adalah objek mysqli
 
 // Ambil data dari POST
 $user_id = $_POST['user_id'];
+$verifikasi_id = $_POST['verifikasi_id'];
 $pengajuan_id = $_POST['pengajuan_id'];
 $nama = $_POST['nama'];
 $kriminal = $_POST['kriminal'];
@@ -23,6 +24,16 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 if ($row['cnt'] > 0) {
+    // Update verifikasi_admin
+    $sql = "UPDATE verifikasi_admin 
+            SET 
+            riwayat_kriminal = ?, 
+            status_hukum = ? 
+            WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "iii", $kriminal, $status, $verifikasi_id);
+    mysqli_stmt_execute($stmt);
+
     // Update data
     $sqlUpdate = "UPDATE fuzzy_hasil SET user_id=?, nama=?, kriminal=?, status=?, nilai_akhir=?, keputusan=? WHERE pengajuan_id=?";
     $stmtUpdate = $conn->prepare($sqlUpdate);

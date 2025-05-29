@@ -11,7 +11,8 @@ $sql = "SELECT
             IF(v.pengajuan_id IS NULL, 'Belum Diperiksa', 'Dikonfirmasi') AS status_verifikasi,
             IF(v.pengajuan_id IS NULL, 0, 1) AS bool_verifikasi,
             v.riwayat_kriminal,
-            v.status_hukum
+            v.status_hukum,
+            v.id AS verifikasi_id
         FROM pengajuan p
         JOIN user u ON p.user_id = u.id
         LEFT JOIN verifikasi_admin v ON p.id = v.pengajuan_id
@@ -117,6 +118,8 @@ $result = mysqli_query($conn, $sql);
                             <th scope="col">Nama Lengkap</th>
                             <th scope="col">Tanggal Pengajuan</th>
                             <th scope="col">Status Hitung</th>
+                            <th scope="col">Riwayat Kriminal</th>
+                            <th scope="col">Status Hukum</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -124,21 +127,27 @@ $result = mysqli_query($conn, $sql);
                         <!-- Data dapat dimuat dinamis, contoh 3 pengaju -->
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
                             <?php if($row['bool_verifikasi'] == 0) continue;?>
-                            <tr>
-                                <td><?= $row['nama_lengkap'] ?></td>
-                                <td class="text-center"><?= $row['tanggal_pengajuan'] ?></td>
-                                <td class="text-center status-hitung"><?= ucwords($row['status_hitung']) ?></td>
-                                <td class="text-center">
-                                    <form method="post" action="admin/simpan_hitung.php" class="form-hitung">
+                            <form method="post" action="admin/simpan_hitung.php" class="form-hitung">
+                                <tr>
+                                    <td><?= $row['nama_lengkap'] ?></td>
+                                    <td class="text-center"><?= $row['tanggal_pengajuan'] ?></td>
+                                    <td class="text-center status-hitung"><?= ucwords($row['status_hitung']) ?></td>
+                                    <td class="text-center status-hitung">
+                                        <input type="number" name="kriminal" class="form-control form-control-sm text-center" value="<?= $row['riwayat_kriminal'] ?>">
+                                    </td>
+                                    <td class="text-center status-hitung">
+                                        <input type="number" name="status" class="form-control form-control-sm text-center" value="<?= $row['status_hukum'] ?>">
+                                    </td>
+                                    <td class="text-center">
                                         <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                        <input type="hidden" name="verifikasi_id" value="<?= $row['verifikasi_id'] ?>">
                                         <input type="hidden" name="pengajuan_id" value="<?= $row['pengajuan_id'] ?>">
                                         <input type="hidden" name="nama" value="<?= $row['nama_lengkap'] ?>">
-                                        <input type="hidden" name="kriminal" value="<?= $row['riwayat_kriminal'] ?>">
-                                        <input type="hidden" name="status" value="<?= $row['status_hukum'] ?>">
                                         <button type="submit" class="btn btn-primary btn-sm">Hitung</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </form>
+
                         <?php endwhile ?>
                     </tbody>
                 </table>
@@ -336,6 +345,32 @@ $result = mysqli_query($conn, $sql);
         // });
 
     </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Ambil semua form dengan class "form-hitung"
+    const forms = document.querySelectorAll('.form-hitung');
+
+    forms.forEach(form => {
+        form.addEventListener('submit', function (e) {
+            const formData = new FormData(form);
+
+            // Ambil nilai spesifik
+            const riwayatKriminal = formData.get('kriminal');
+            const statusHukum = formData.get('status');
+
+            console.log(riwayatKriminal);
+            console.log(statusHukum);
+
+            if (!riwayatKriminal || !statusHukum) {
+                e.preventDefault();
+                alert('Semua nilai wajib diisi!');
+            }
+        });
+    });
+});
+</script>
+
 
 
     <!-- <script>

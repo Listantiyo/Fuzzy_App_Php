@@ -511,18 +511,18 @@ $verifikasi = mysqli_fetch_assoc($q_verifikasi);
                     value="<?php echo $verifikasi == null ? '' : $verifikasi['id'] ?>">
 
                     <h6 class="fw-bold text-primary mb-3">Verifikasi</h6>
-                <div class="row g-2 mb-3">
+                <!-- <div class="row g-2 mb-3">
                     <div class="col-md-6">
                         <label for="poin_riwayat_kriminal" class="form-label">Poin Riwayat Kriminal</label>
                         <input type="number" class="form-control" id="poin_riwayat_kriminal" name="poin_riwayat_kriminal"
-                            value="<?php echo $verifikasi == null ? '' : $verifikasi['riwayat_kriminal'] ?>" required>
+                            value="<?php //echo $verifikasi == null ? '' : $verifikasi['riwayat_kriminal'] ?>" required>
                     </div>
                     <div class="col-md-6">
                         <label for="poin_status_hukum" class="form-label">Poin Status Hukum</label>
                         <input type="number" class="form-control" id="poin_status_hukum" name="poin_status_hukum"
-                            value="<?php echo $verifikasi == null ? '' : $verifikasi['status_hukum'] ?>" required>
+                            value="<?php //echo $verifikasi == null ? '' : $verifikasi['status_hukum'] ?>" required>
                     </div>
-                </div>
+                </div> -->
                 <div class="row g-2 mb-3">
                     <div class="col-md-6">
                         <label for="berada_indonesia_dari" class="form-label">Berada di Indonesia Dari</label>

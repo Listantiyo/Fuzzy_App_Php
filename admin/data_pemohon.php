@@ -5,6 +5,7 @@ include "conn.php";
 $sql = "SELECT 
             p.id AS pengajuan_id,
             u.nama_lengkap,
+            u.no_hp,
             p.dibuat_pada AS tanggal_pengajuan,
             IF(v.pengajuan_id IS NULL, 'Belum Diperiksa', 'Dikonfirmasi') AS status_verifikasi,
             IF(v.pengajuan_id IS NULL, 0, 1) AS bool_verifikasi
@@ -138,6 +139,7 @@ $result = mysqli_query($conn, $sql);
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama Lengkap</th>
+                            <th scope="col">No HP</th>
                             <th scope="col">Tanggal Pengajuan</th>
                             <th scope="col">Status Verifikasi</th>
                             <th scope="col">Aksi</th>
@@ -148,6 +150,7 @@ $result = mysqli_query($conn, $sql);
                         <tr>
                             <td><?php echo $ix?></td>
                             <td><?php echo $row['nama_lengkap'] ?></td>
+                            <td class="text-center"><?php echo $row['no_hp'] ?></td>
                             <td class="text-center"><?php echo $row['tanggal_pengajuan'] ?></td>
                             <td class="text-center"><span class="badge bg-<?php echo $row['bool_verifikasi'] == 1 ? 'success' : 'warning' ?>"><?php echo $row['status_verifikasi'] ?></span></td>
                             <td class="text-center">
