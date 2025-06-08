@@ -17,7 +17,10 @@ $stmt = $conn->prepare("INSERT INTO user (username, password, nama_lengkap, emai
 $stmt->bind_param("sssssssssss", $username, $password, $nama_lengkap, $email, $no_hp, $agama, $kebangsaan, $noktp, $tempat_lahir, $tanggal_lahir, $jenis_kelamin);
 
 if ($stmt->execute()) {
-    echo "Registrasi berhasil. <a href='../index.php?login=true'>Login di sini</a>";
+    echo "<script>
+        alert('Terimakasih, Anda sudah berhasil melakukan registrasi!');
+        window.location.href='../index.php?login=true';
+    </script>";
 } else {
     echo "Gagal menyimpan data: " . $stmt->error;
 }

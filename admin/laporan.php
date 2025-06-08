@@ -13,9 +13,11 @@ SELECT
   fuzzy_hasil.nilai_akhir,
   fuzzy_hasil.keputusan,
   fuzzy_hasil.created_at,
-  pg.dibuat_pada AS tanggal_pengajuan
+  pg.dibuat_pada AS tanggal_pengajuan,
+  user.no_hp
 FROM fuzzy_hasil
 JOIN pengajuan pg ON pg.id = fuzzy_hasil.pengajuan_id
+LEFT JOIN user ON user.id = fuzzy_hasil.user_id
 ORDER BY fuzzy_hasil.created_at DESC
 ";
 
@@ -162,6 +164,9 @@ $conn->close();
                             <td class="table-actions text-center">
                                 <a href="login_admin.php?page=detail_pemohon&detail=true&pid=<?= $row['pengajuan_id']?>" class="btn btn-info btn-sm" >
                                     🔍 Detail
+                                </a>
+                                <a href="https://wa.me/<?= $row['no_hp'] ?>" target="_blank" class="btn btn-success btn-sm">
+                                    💬 WhatsApp
                                 </a>
                             </td>
                         </tr>

@@ -246,7 +246,6 @@
 
     <main id="content">
         <h2>Update Berita Polsek</h2>
-
         <article class="main-news" tabindex="0" role="article" aria-label="Berita utama">
             <img src=https://peloporwiratama.co.id/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-07-at-14.58.06.jpeg" />
             <!-- <img src=https://dummyimage.com/600x400/777/fff.jpg&text=Sample+Image" /> -->

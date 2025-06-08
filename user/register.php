@@ -77,7 +77,15 @@ button[type="submit"]:hover {
         <input type="text" name="no_hp">
 
         <label>Agama:</label>
-        <input type="text" name="agama" required>
+        <select name="agama" required>
+            <option value="">Pilih Agama</option>
+            <option value="Islam">Islam</option>
+            <option value="Kristen">Kristen</option>
+            <option value="Katolik">Katolik</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Buddha">Buddha</option>
+            <option value="Konghucu">Konghucu</option>
+        </select>
 
         <label>Kebangsaan:</label>
         <input type="text" name="kebangsaan" required>
